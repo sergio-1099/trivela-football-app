@@ -8,6 +8,10 @@ body {
   background-color: #1F1B24;
 }
 
+#root {
+  display: flex;
+}
+
 nav {
   background-color: #335C67;
   height: 100vh;
@@ -17,6 +21,10 @@ nav {
   color: #FFFFFF;
   font-size: 18px;
   padding: 15px;
+}
+
+.table-container {
+  margin-left: 2em;
 }
 
 h1 {
@@ -45,4 +53,58 @@ h1 {
 
 .selected {
   color: #FFF3B0;
+}
+
+td {
+  color: #FFFFFF;
+}
+
+th {
+  color: #FFF3B0;
+  text-align: left;
+}
+
+.league-table {
+  width: 55vw;
+  border-collapse: collapse;
+}
+
+.league-table-container {
+  border: 2px solid #335C67;
+  padding: 5px;
+  margin-top: 1em;
+}
+
+.team-image {
+  height: 25px;
+}
+
+.league-heading {
+  color: #FFFFFF;
+  margin-top: 1em;
+}
+
+.season-changer {
+  display: inline;
+  margin-top: 3px;
+}
+
+label {
+  color: #FFFFFF;
+}
+
+select {
+  background-color: #335C67;
+  border: none;
+  color: #FFF3B0;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.number-column {
+  width: 30px;
+}
+
+tbody > tr:hover {
+  background-color: rgba(255,243,176, 0.5);
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 function Nav(props) {
   const leagueElements = props.leagueSelection.map(league => {
@@ -35,18 +35,21 @@ function Nav(props) {
         {leagueElements[2]}
         {leagueElements[3]}
         {leagueElements[4]}
+        {leagueElements[5]}
+        {leagueElements[6]}
+        {leagueElements[7]}
 
       </ul>
 
       <h2 className="competition-cat">European Leagues</h2>
       <ul className="nav-list">
-        {leagueElements[5]}
+        {leagueElements[8]}
       </ul>
 
       <h2 className="competition-cat">International Leagues</h2>
       <ul className="nav-list">
-        {leagueElements[6]}
-        {leagueElements[7]}
+        {leagueElements[9]}
+        {leagueElements[10]}
       </ul>
     </nav>
   )
