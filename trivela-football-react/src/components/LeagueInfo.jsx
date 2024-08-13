@@ -14,12 +14,15 @@ function LeagueInfo(props) {
     const fetchLeagueInfo = async () => {
       try {
         const authToken = import.meta.env.VITE_API_KEY
+        const apiBaseUrl = import.meta.env.PROD
+          ? 'https://api.football-data.org/v4/competitions'
+          : '/api/v4/competitions'
 
-        const response = await fetch(`/api/v4/competitions/${selectedLeague}/standings/?season=${season}`, {
+        const response = await fetch(`${apiBaseUrl}/${selectedLeague}/standings/?season=${season}`, {
           headers: {
             'X-Auth-Token': authToken,
-          }
-        })        
+          },
+        })     
         leagueStandings = await response.json()
         standings = leagueStandings.standings[0].table
 
