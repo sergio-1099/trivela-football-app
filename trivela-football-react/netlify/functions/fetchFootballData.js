@@ -1,18 +1,28 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async function(event, context) {
+export const handler = async function(event, context) {
   const { path } = event;
   const apiKey = process.env.VITE_API_KEY;
-
   const apiUrl = `https://api.football-data.org${path.replace('/.netlify/functions/fetchFootballData', '')}`;
-  
+
+  console.log(`Fetching from API: ${apiUrl}`);
+
   try {
     const response = await fetch(apiUrl, {
       headers: {
         'X-Auth-Token': apiKey,
       },
     });
-    
+
+    if (!response.ok) {
+      const error = await response.text();
+      console.error(`API Error: ${error}`);
+      return {
+        statusCode: response.status,
+        body: JSON.stringify({ error: 'Failed to fetch data' }),
+      };
+    }
+
     const data = await response.json();
 
     return {
@@ -24,6 +34,7 @@ exports.handler = async function(event, context) {
       },
     };
   } catch (error) {
+    console.error("Function Error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed to fetch data' }),
