@@ -13,7 +13,13 @@ function LeagueInfo(props) {
   React.useEffect(() => {
     const fetchLeagueInfo = async () => {
       try {
-        const response = await fetch(`/.netlify/functions/fetchFootballData/v4/competitions/${selectedLeague}/standings/?season=${season}`);
+        const baseUrl = window.location.hostname === 'localhost'
+        ? 'http://localhost:8888/.netlify/functions'
+        : '/.netlify/functions'
+        const apiUrl = `${baseUrl}/fetchFootballData/v4/competitions/${selectedLeague}/standings/?season=${season}`
+
+        console.log(`Full API Path: ${apiUrl}`)
+        const response = await fetch(apiUrl)
 
         leagueStandings = await response.json()
         standings = leagueStandings.standings[0].table
@@ -25,8 +31,6 @@ function LeagueInfo(props) {
         setTable(tableContent)
       } catch (error) {
         console.log("Error fetching data: ")
-        
-        table = <p>Error retrieving stuff.</p>
       }
     }
 

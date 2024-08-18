@@ -1,14 +1,17 @@
 import fetch from 'node-fetch';
 
 export const handler = async function(event, context) {
-  const { path } = event;
+  const { path, queryStringParameters } = event;
   const apiKey = process.env.VITE_API_KEY;
   const apiUrl = `https://api.football-data.org${path.replace('/.netlify/functions/fetchFootballData', '')}`;
 
-  console.log(`Fetching from API: ${apiUrl}`);
+  const queryString = new URLSearchParams(queryStringParameters).toString();
+  const fullApiUrl = `${apiUrl}${queryString ? '?' + queryString : ''}`;
+
+  console.log(`Fetching from API: ${fullApiUrl}`);
 
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(fullApiUrl, {
       headers: {
         'X-Auth-Token': apiKey,
       },
